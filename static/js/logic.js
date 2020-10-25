@@ -1,10 +1,12 @@
 // Store API link
 var geojsonData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 
+//Enlarging the marker size in order to be visible.
 function markerSize(magnitude) {
-    return magnitude * 35000;
+    return magnitude * 25000;
 }
 
+//Creating the magnitude scaling by color based of ritcher scale.
 function getColor(magnitude) {
     if (magnitude <= 1) {
         return "#ADFF2F";
@@ -72,14 +74,14 @@ function createMap(earthquakes) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
-    // Base Map Layers in order to toggle through in Control Layer Icon
+    // Base Map Layers in order to toggle through in Control Layer Icon.
     var baseMaps = {
         "Satelite Map": satelitemap,
         "Grayscale": grayscalemap,
         "Outdoors": outdoormap
     };
 
-    // Create overlay object to hold our overlay layer
+    // Create overlay object to hold our overlay layer.
     var overlayMaps = {
         Earthquakes: earthquakes
     };
@@ -96,6 +98,7 @@ function createMap(earthquakes) {
         collapsed: false
     }).addTo(myMap);
 
+    //Add Legend in order to depict the magnitude color scale.
     var legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = function() {
